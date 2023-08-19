@@ -1,0 +1,19 @@
+{
+  "users": [
+    {
+      "name": "John Nolan",
+      "job": "Police Officer",
+      "id": "e6bc1e71-8b6f-4504-925e-50ca6a82942e"
+    },
+    {
+      "name": "Leo12345678",
+      "job": "W33eb3 4Dev",
+      "id": "a1fa64d9-9a57-466f-90c0-8011663bed0e"
+    },
+    {
+      "name": "Leo12365565645",
+      "job": "W33eb3 4Dev",
+      "id": "1b41c879-564b-4758-9478-c72286828b76"
+    }
+  ]
+}
