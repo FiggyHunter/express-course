@@ -14,11 +14,18 @@ const router = express.Router();
 router.use(bodyParser.urlencoded({ extended: false }));
 router.use(bodyParser.json());
 
-router.get("/", getUsers);
-router.get("/:id", getUserByID);
-router.post("/", createUser);
-router.put("/:id", updateUser);
-router.patch("/:id", replaceUser);
-router.delete("/:id", deleteUser);
+router.route("/").get(getUsers).post(createUser);
+
+router
+  .route("/:id")
+  .get(getUserByID)
+  .put(updateUser)
+  .patch(replaceUser)
+  .delete(deleteUser);
+
+// router.get("/:id", getUserByID);
+// router.put("/:id", updateUser);
+// router.patch("/:id", replaceUser);
+// router.delete("/:id", deleteUser);
 
 export default router;
