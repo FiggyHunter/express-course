@@ -1,6 +1,10 @@
 import Express from "express";
 import userRouter from "./routes/user.routes.js";
 import registerRouter from "./routes/auth.routes.js";
+import authRouter from "./routes/auth.routes.js";
+
+import mongoose from "mongoose";
+await mongoose.connect("mongodb://127.0.0.1:27017/node-server");
 
 const app = Express();
 const port = 4000;
@@ -19,3 +23,4 @@ app.get("/health", (req, res) => {
 
 app.use("/users", userRouter);
 app.use("/register", registerRouter);
+app.use("/auth", authRouter);
