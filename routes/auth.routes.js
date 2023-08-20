@@ -1,12 +1,18 @@
 import express from "express";
 import bodyParser from "body-parser";
-import { registerUser } from "../controllers/auth.controller.js";
+import {
+  registerUser,
+  loginUsers,
+  validateToken,
+} from "../controllers/auth.controller.js";
 
 const router = express.Router();
 
 router.use(bodyParser.urlencoded({ extended: false }));
 router.use(bodyParser.json());
 
-router.post("/", registerUser);
+router.post("/register", registerUser);
+router.post("/login", loginUsers);
+router.post("/validate", validateToken);
 
 export default router;
