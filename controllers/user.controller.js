@@ -1,20 +1,33 @@
 import fs from "fs";
 import { check, validationResult } from "express-validator";
 import { v4 as uuidv4 } from "uuid";
+import User from "../model/user.model.js";
 
-export const getUsers = (req, res) => {
-  const users = fs.readFileSync("./db.json");
-  res.send(JSON.parse(users.toString()));
+export const getUsers = async (req, res) => {
+  const users = await User.find();
+  res.send(users);
 };
 
-export const getUserByID = (req, res) => {
-  const users = fs.readFileSync("./db.json");
-  const usersArray = JSON.parse(users.toString());
+export const getUserByID = async (req, res) => {
+  try {
+    const _id = req.params.id;
+    const user = await User.findOne({ _id });
+    if (user) {
+      return res.status(200).send(user);
+    }
 
-  const returnedUser = usersArray.users.find(
-    (user) => user.id === req.params.id
-  );
-  returnedUser ? res.send(returnedUser) : res.send("User not found");
+    return res.status(404).send("User not found");
+  } catch (e) {
+    res.status(404).send("Something went wrong when trying to find the user.");
+  }
+  // const usersArray = JSON.parse(users.toString());
+
+  // const returnedUser = usersArray.users.find(
+  //   (user) => user.id === req.params.id
+  // );
+
+  // delete returnedUser.password;
+  // returnedUser ? res.send(returnedUser) : res.send("User not found");
 };
 
 export const createUser = (req, res) => {
