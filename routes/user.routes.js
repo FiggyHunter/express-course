@@ -8,18 +8,23 @@ import {
   replaceUser,
   deleteUser,
 } from "../controllers/user.controller.js";
+import authMiddleware from "../middleware/auth.middleware.js";
+import roleMiddleware from "../middleware/role.middleware.js";
 
 const router = express.Router();
 
 router.use(bodyParser.urlencoded({ extended: false }));
 router.use(bodyParser.json());
 
-router.route("/").get(getUsers).post(createUser);
+router
+  .route("/")
+  .get(authMiddleware, roleMiddleware, getUsers)
+  .post(createUser);
 
 router
   .route("/:id")
   .get(getUserByID)
-  .put(updateUser)
+  .put(authMiddleware, updateUser)
   .patch(replaceUser)
   .delete(deleteUser);
 
