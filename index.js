@@ -1,5 +1,6 @@
 import Express from "express";
 import userRouter from "./routes/user.routes.js";
+import registerRouter from "./routes/auth.routes.js";
 
 const app = Express();
 const port = 4000;
@@ -17,3 +18,4 @@ app.get("/health", (req, res) => {
 });
 
 app.use("/users", userRouter);
+app.use("/register", registerRouter);
